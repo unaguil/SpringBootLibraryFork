@@ -26,7 +26,7 @@ Good example documenting how to generate Swagger APIs in Spring Boot: https://be
 
 Swagger UI: http://localhost:8080/swagger-ui.html
 OpenAPI JSON: http://localhost:8080/v3/api-docs
-
+Access front-end at: http://localhost:8080
 
 1. Run all tests (Unit & Integration)
 
@@ -56,3 +56,32 @@ To run only performance tests, use:
 mvn -Dtest=PerformanceTest test
 
 Documentation on how to use Gatling: https://medium.com/thefreshwrites/getting-started-with-gatling-in-java-using-maven-b1664f6533d#:~:text=Gatling%20is%20a%20popular%20open,Gatling%20in%20Java%20using%20Maven. 
+
+Maven Commands to Run Tests and Generate Reports
+Run all unit and performance tests
+
+mvn test
+
+Run JaCoCo test coverage report
+mvn verify
+mvn clean test jacoco:report # creates the report
+mvn clean verify jacoco:report # if the check fails jacoco stops
+
+
+Generate reports for testing, coverage, and code quality
+mvn site
+
+The reports will be available under target/site/index.html.
+
+These changes enable test coverage (JaCoCo), static analysis (CheckStyle, PMD, JDepend), unit testing (Surefire), and performance testing (JUnitPerf).
+
+Documentation about JaCoCo and Spring Boot
+https://medium.com/@truongbui95/jacoco-code-coverage-with-spring-boot-835af8debc68
+
+
+mvn clean verify site
+Then, open target/site/index.html, and the JaCoCo report should be available.
+
+
+Documentation JUnitPerf: https://noconnor.github.io/JUnitPerf/docs/junit5.html
+

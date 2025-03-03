@@ -28,6 +28,10 @@ public class BorrowingService {
     @Autowired
     private BorrowingRepository borrowingRepository;
 
+    public List<Borrowing> getAllBorrowings() {
+        return borrowingRepository.findAll();
+    }
+
     public boolean borrowBook(Long bookId, User user) {
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         if (optionalBook.isPresent()) {
