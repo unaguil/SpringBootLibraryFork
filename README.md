@@ -34,6 +34,7 @@ For a detailed breakdown, refer to [HOWTO_SPRINGBOOT.md](HOWTO_SPRINGBOOT.md).
     ```
    ```sh
    mvn spring-boot:run
+   mvn -DskipTests spring-boot:run
    ```
 4. Access the application:
    - **Frontend UI**: `http://localhost:8080`
@@ -64,7 +65,7 @@ To run all tests with more verbose output:
 ```sh
 mvn test -Dspring-boot.run.profiles=test
 ```
-This ensures your unit tests mock dependencies properly while integration tests interact with a real embedded server.
+This ensures that your unit tests mock dependencies work properly while integration tests interact with a real embedded server.
 
 To test JaCoCo test coverage report
 ```sh
@@ -72,11 +73,11 @@ mvn verify
 mvn clean test jacoco:report # creates the report
 mvn clean verify jacoco:report # if the check fails jacoco stops
 ```
-Then, open target/site/jacoco/index.html, and the JaCoCo report should be available.
+Then, open `target/site/jacoco/index.html`, and the JaCoCo report should be available.
 
 To generate a test report (JaCoCo, PMD, Checkstyle):
 ```sh
 mvn site
 mvn clean verify site
 ```
-Then, open target/site/index.html, and the JaCoCo report should be available.
+Then, open `target/site/index.html`, and the JaCoCo report should be available.
