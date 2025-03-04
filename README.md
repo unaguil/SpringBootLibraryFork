@@ -1,87 +1,82 @@
-Sprint initializer: https://start.spring.io/
-mvn clean install
-mvn spring-boot:run
+# Library Borrowing System
 
-GET http://localhost:8080/api/books
+## Purpose
+This application allows users to borrow and return books seamlessly through a shared platform. Users can manage book availability, track borrowed books, and return them, facilitating an efficient book-sharing system.
 
-POST http://localhost:8080/api/books
-Content-Type: application/json
+## Architecture Overview
+The application is built using **Spring Boot**, following the **MVC (Model-View-Controller) pattern**:
+- **Model**: Defines the entities and database interaction via JPA.
+- **View**: A frontend built with **HTML, JavaScript** (and **Thymeleaf** if needed, not done in this example).
+- **Controller**: Handles HTTP requests and business logic.
 
-{
- "title": "Spring Boot in Action",
- "author": "Craig Walls",
- "isbn": "9781617292545"
-}
+### Key Components
+- `src/main/java/com/example/library/` (Main Java source folder)
+  - `controller/` – RESTful controllers handling requests.
+  - `service/` – Business logic layer.
+  - `repository/` – Interfaces for database interactions.
+  - `model/` – Entity definitions using JPA.
+- `src/main/resources/static/` – Contains HTML, JavaScript, and CSS for the UI.
+- `src/main/resources/application.properties` – Configuration file for database and server settings.
+- **Swagger**: API documentation is generated automatically using **Springdoc OpenAPI**.
 
-DELETE http://localhost:8080/api/books/1
+For a detailed breakdown, refer to [HOWTO_SPRINGBOOT.md](HOWTO_SPRINGBOOT.md).
 
-Very good explaination of the project
-Reference: https://medium.com/@pratik.941/building-rest-api-using-spring-boot-a-comprehensive-guide-3e9b6d7a8951 
-Building REST services with Sprint: https://spring.io/guides/tutorials/rest
-Docker example with Sprint:https://medium.com/@yunuseulucay/end-to-end-spring-boot-with-mysql-and-docker-2c42a6e036c0
+## Running the Application
+1. Start MySQL and create the required database:
+   ```sh
+   mysql -u root -p < src/main/resources/dbsetup.sql
+   ```
+2. Configure `application.properties` with your database credentials.
+3. Run the application using Maven:
+  - Optionally firt clean and install dependencies explicitly:
+    ```sh
+    mvn clean install
+    ```
+   ```sh
+   mvn spring-boot:run
+   ```
+4. Access the application:
+   - **Frontend UI**: `http://localhost:8080`
+   - **OpenAPI JSON**: `http://localhost:8080/v3/api-docs`
+   - **Swagger API Docs**: `http://localhost:8080/swagger-ui.html`
 
-Visit Swagger interface at: http://localhost:8080/swagger-ui.html
-
-Good example documenting how to generate Swagger APIs in Spring Boot: https://bell-sw.com/blog/documenting-rest-api-with-swagger-in-spring-boot-3/#mcetoc_1heq9ft3o1v 
-
-Swagger UI: http://localhost:8080/swagger-ui.html
-OpenAPI JSON: http://localhost:8080/v3/api-docs
-Access front-end at: http://localhost:8080
-
-1. Run all tests (Unit & Integration)
-
+## Testing the Application
+To run all tests. This will execute all test cases in the src/test/java/ directory:
+```sh
 mvn test
-This will execute all test cases in the src/test/java/ directory.
-
-2. Run only Unit Tests
-To run only unit tests, use:
+```
+To run only unit tests:
+```sh
 mvn -Dtest=UserServiceTest,BookServiceTest test
 mvn -Dtest=*ServiceTest test
-
-3. Run only Integration Tests
-To run only the integration test:
+```
+To run integration tests:
+```sh
 mvn -Dtest=LibraryIntegrationTest test
+```
 
-4. Run tests with detailed output
-For more verbose output:
+To run performance tests:
+```sh
+mvn -Dtest=PerformanceTest test
+```
+
+To run all tests with more verbose output:
+```sh
 mvn test -Dspring-boot.run.profiles=test
-
+```
 This ensures your unit tests mock dependencies properly while integration tests interact with a real embedded server.
 
-To run all tests, including performance tests, use:
-mvn test
-
-To run only performance tests, use:
-
-mvn -Dtest=PerformanceTest test
-
-Documentation on how to use Gatling: https://medium.com/thefreshwrites/getting-started-with-gatling-in-java-using-maven-b1664f6533d#:~:text=Gatling%20is%20a%20popular%20open,Gatling%20in%20Java%20using%20Maven. 
-
-Maven Commands to Run Tests and Generate Reports
-Run all unit and performance tests
-
-mvn test
-
-Run JaCoCo test coverage report
+To test JaCoCo test coverage report
+```sh
 mvn verify
 mvn clean test jacoco:report # creates the report
 mvn clean verify jacoco:report # if the check fails jacoco stops
+```
+Then, open target/site/jacoco/index.html, and the JaCoCo report should be available.
 
-
-Generate reports for testing, coverage, and code quality
+To generate a test report (JaCoCo, PMD, Checkstyle):
+```sh
 mvn site
-
-The reports will be available under target/site/index.html.
-
-These changes enable test coverage (JaCoCo), static analysis (CheckStyle, PMD, JDepend), unit testing (Surefire), and performance testing (JUnitPerf).
-
-Documentation about JaCoCo and Spring Boot
-https://medium.com/@truongbui95/jacoco-code-coverage-with-spring-boot-835af8debc68
-
-
 mvn clean verify site
+```
 Then, open target/site/index.html, and the JaCoCo report should be available.
-
-
-Documentation JUnitPerf: https://noconnor.github.io/JUnitPerf/docs/junit5.html
-
