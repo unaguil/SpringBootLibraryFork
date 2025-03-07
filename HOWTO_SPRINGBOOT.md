@@ -8,6 +8,12 @@ This document provides a detailed explanation of the different components of the
 
 The project follows the **MVC (Model-View-Controller)** pattern. Notices that the skeleton of the project can be generated with [Sprint initializer](https://start.spring.io/).
 
+In summary, the layers that are involved are:
+- Controller: Handles HTTP requests and sends responses.
+- Service: Contains business logic and interacts with repositories.
+- Repository: Manages data access and CRUD operations using Spring Data JPA.
+- Entity: Represents the data model and maps to a database table.
+
 
 ### 1. Model Layer
 
@@ -92,6 +98,38 @@ The project follows the **MVC (Model-View-Controller)** pattern. Notices that th
   public class OpenAPIConfig {}
   ```
 - [Springdoc OpenAPI](https://springdoc.org/)
+
+### 7. DTO - Data Transfer Objects
+
+When building a REST API in Java using Spring Boot, it’s common to use Data Transfer Objects (DTOs) to encapsulate data that will be sent or received by the API. 
+DTOs are simple objects that only contain fields and getter/setter methods, without any business logic, and are used to transfer data between layers of the application.
+
+- Example DTO:
+  ```java
+  package com.example.demo.dto;
+
+  public class ProductDTO {
+
+      private Long id;
+      private String name;
+      private String description;
+      private double price;
+
+      // Constructors, getters, and setters
+
+      public ProductDTO() {}
+
+      public ProductDTO(Long id, String name, String description, double price) {
+          this.id = id;
+          this.name = name;
+          this.description = description;
+          this.price = price;
+      }
+
+      // Getters and Setters
+  }
+  ```
+
 
 ## Running the Application
 

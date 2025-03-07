@@ -81,3 +81,16 @@ mvn site
 mvn clean verify site
 ```
 Then, open `target/site/index.html`, and the JaCoCo report should be available.
+
+## Launching the app with Docker
+You may launch the app in one single command.
+
+If you just need to start your containers without rebuilding them.
+```sh
+docker-compose up	
+```
+If you've changed the Dockerfile, dependencies, or environment configurations.
+```sh
+docker-compose up --build	
+```
+

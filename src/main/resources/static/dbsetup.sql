@@ -1,5 +1,13 @@
 CREATE DATABASE IF NOT EXISTS libraryapidb;
-CREATE USER IF NOT EXISTS 'dbuser'@'localhost' IDENTIFIED BY 'dbuser';
-ALTER USER 'dbuser'@'localhost' IDENTIFIED WITH mysql_native_password BY 'dbuser';
-GRANT ALL PRIVILEGES ON libraryapidb.* TO 'dbuser'@'localhost' WITH GRANT OPTION;
-FLUSH PRIVILEGES
+
+-- Crear usuario para conexiones remotas
+CREATE USER IF NOT EXISTS 'dbuser'@'%' IDENTIFIED BY 'dbuser';
+
+-- Asegurar autenticación con mysql_native_password
+ALTER USER 'dbuser'@'%' IDENTIFIED WITH mysql_native_password BY 'dbuser';
+
+-- Conceder privilegios al usuario
+GRANT ALL PRIVILEGES ON libraryapidb.* TO 'dbuser'@'%' WITH GRANT OPTION;
+
+-- Aplicar cambios
+FLUSH PRIVILEGES;
