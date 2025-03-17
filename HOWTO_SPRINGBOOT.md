@@ -9,10 +9,10 @@ This document provides a detailed explanation of the different components of the
 The project follows the **MVC (Model-View-Controller)** pattern. Notices that the skeleton of the project can be generated with [Sprint initializer](https://start.spring.io/).
 
 In summary, the layers that are involved are:
-- Controller: Handles HTTP requests and sends responses.
-- Service: Contains business logic and interacts with repositories.
-- Repository: Manages data access and CRUD operations using Spring Data JPA.
-- Entity: Represents the data model and maps to a database table.
+- *Controller*: Handles HTTP requests and sends responses.
+- *Service*: Contains business logic and interacts with repositories.
+- *Repository*: Manages data access and CRUD operations using Spring Data JPA.
+- *Entity*: Represents the data model and maps to a database table.
 
 
 ### 1. Model Layer
