@@ -187,7 +187,7 @@ DTOs are simple objects that only contain fields and getter/setter methods, with
 - [Spring Boot Guides](https://spring.io/guides)
 - [Very good explaination of the project at Medium, only including Book service](https://medium.com/@pratik.941/building-rest-api-using-spring-boot-a-comprehensive-guide-3e9b6d7a8951) 
 - [Building REST services with Sprint](https://spring.io/guides/tutorials/rest)
-- [Docker example with Sprint](https://medium.com/@yunuseulucay/end-to-end-spring-boot-with-mysql-and-docker-2c42a6e036c0)
+- [Docker example with Spring](https://medium.com/@yunuseulucay/end-to-end-spring-boot-with-mysql-and-docker-2c42a6e036c0)
 - [Documentation about JaCoCo and Spring Boot](https://medium.com/@truongbui95/jacoco-code-coverage-with-spring-boot-835af8debc68)
 - [Documentation JUnitPerf](https://noconnor.github.io/JUnitPerf/docs/junit5.html)
 - [JaCoCo official documentation](https://www.jacoco.org/jacoco/trunk/index.html)
