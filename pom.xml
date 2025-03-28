@@ -219,6 +219,13 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<!-- Site plugin for generating reports -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.21.0</version>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -258,13 +265,6 @@
 
 	<reporting>
 		<plugins>
-			<!-- Site plugin for generating reports -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.21.0</version>
-			</plugin>
-
 			<!-- Checkstyle report for code quality -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
