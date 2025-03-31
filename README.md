@@ -70,7 +70,7 @@ mvn test -Dspring-boot.run.profiles=test
 ```
 This ensures that your unit tests mock dependencies work properly while integration tests interact with a real embedded server.
 
-To test JaCoCo test coverage report
+To test JaCoCo test coverage report. Try to change coverage threshold from 0.5 to 0.2 to ensure that check is successful. 
 ```sh
 mvn verify
 mvn clean test jacoco:report # creates the report

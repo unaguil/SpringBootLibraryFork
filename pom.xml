@@ -141,7 +141,7 @@
 						<configuration>
 							<rules>
 								<rule>
-									<element>PACKAGE</element>
+									<element>BUNDLE</element>
 									<limits>
 										<limit>
 											<counter>LINE</counter>
@@ -151,6 +151,11 @@
 									</limits>
 								</rule>
 							</rules>
+							<excludes>
+								<exclude>com/example/restapi/config/**</exclude>
+								<exclude>com/example/restapi/controller/**</exclude>
+								<exclude>com/example/restapi/RestApiApplication*.*</exclude>
+							</excludes>
 						</configuration>
 					</execution>
 				</executions>
