@@ -313,6 +313,20 @@
 				</reportSets>
 			</plugin>
 
+			<!-- JUnit report for passed tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.5.2</version> 
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
 			<!-- JaCoCo report for test coverage -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
