@@ -59,7 +59,7 @@ To run integration tests:
 mvn -Pintegration integration-test
 ```
 
-To run performance tests:
+To run performance tests, use the following command. [JUnitPerf documentation](https://noconnor.github.io/JUnitPerf/docs/junit5.html) should be checked to understand the code in performance directory.  
 ```sh
 mvn -Pperformance integration-test
 ```
@@ -83,6 +83,12 @@ To generate a test report (JaCoCo, PMD, Checkstyle):
 mvn site
 mvn clean verify site
 ```
+
+If you want to also see the performance tests reports you also need to run the following command. Check target/reports for the HTML report on performance.
+```sh
+mvn -Pperformance integration-test
+```
+
 Then, open `target/site/index.html`, and the JaCoCo report should be available.
 
 ## Launching the app with Docker

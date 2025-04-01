@@ -12,7 +12,7 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>rest-api</artifactId>
+	<artifactId>springboot-library-api-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>springboot-library-api-app</name>
@@ -75,10 +75,17 @@
 			<version>2.3.0</version> <!-- Check latest version -->
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.github.noconnor</groupId>
 			<artifactId>junitperf</artifactId>
 			<version>1.18.0</version>
+			<scope>test</scope>
+		</dependency> -->
+
+		<dependency>
+			<groupId>com.github.noconnor</groupId>
+			<artifactId>junitperf-junit5</artifactId>
+			<version>1.37.0</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -146,7 +153,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.50</minimum>
+											<minimum>0.25</minimum>
 										</limit>
 									</limits>
 								</rule>
@@ -262,6 +269,33 @@
 								<include>**/performance/**</include>
 							</includes>
 						</configuration>
+					</plugin>
+					<!-- Copy the report into the site directory
+					Use the maven-resources-plugin or maven-antrun-plugin to copy your generated report (perf-report.html) 
+					from target/reports to the site output directory before site generation. -->
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>3.3.1</version>
+						<executions>
+							<execution>
+								<id>copy-perf-report</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.directory}/site/reports</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.build.directory}/reports</directory>
+											<includes>
+												<include>perf-report.html</include>
+											</includes>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>

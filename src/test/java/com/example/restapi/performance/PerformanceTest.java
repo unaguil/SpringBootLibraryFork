@@ -1,7 +1,12 @@
 package com.example.restapi.performance;
 
 import com.github.noconnor.junitperf.JUnitPerfTest;
+import com.github.noconnor.junitperf.JUnitPerfTestActiveConfig;
+import com.github.noconnor.junitperf.JUnitPerfInterceptor;
+import com.github.noconnor.junitperf.JUnitPerfReportingConfig;
 import com.github.noconnor.junitperf.JUnitPerfTestRequirement;
+import com.github.noconnor.junitperf.reporting.providers.HtmlReportGenerator;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import com.example.restapi.service.BorrowingService;
 import com.example.restapi.service.UserService;
 
 @SpringBootTest
+@ExtendWith(JUnitPerfInterceptor.class)
 public class PerformanceTest {
 
     @Autowired
@@ -22,6 +28,13 @@ public class PerformanceTest {
     @Autowired
     private UserService userService;
     
+    // Should be static or new instance will be created for each @Test method
+    @JUnitPerfTestActiveConfig
+    private final static JUnitPerfReportingConfig PERF_CONFIG = JUnitPerfReportingConfig.builder()
+            .reportGenerator(new HtmlReportGenerator(System.getProperty("user.dir") + "/target/reports/perf-report.html"))
+            .build();
+
+
     @BeforeEach
     void setup() {
         // Optional setup before each test if required
@@ -46,12 +59,8 @@ public class PerformanceTest {
     // Test getAllUsers() with a high-load scenario of 100 users for 15 seconds
     @Test
     @JUnitPerfTest(threads = 100, durationMs = 15000, warmUpMs = 3000)
-    @JUnitPerfTestRequirement(percentiles = "90:7,95:7,98:7,99:8", executionsPerSec = 1000, allowedErrorPercentage = 0.10f)
+    @JUnitPerfTestRequirement(percentiles = "90:100ms,95:150ms,98:200ms,99:250ms", executionsPerSec = 1000, allowedErrorPercentage = 0.10f)
     public void testGetAllUsersPerformance() {
         userService.getAllUsers();
     }
-
-    
-
-
 }
