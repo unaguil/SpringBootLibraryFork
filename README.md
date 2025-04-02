@@ -84,7 +84,7 @@ mvn site
 mvn clean verify site
 ```
 
-If you want to also see the performance tests reports you also need to run the following command. Check target/reports for the HTML report on performance.
+If you want to also see the performance tests reports you also need to run the following command. Check `target/reports` for the HTML report on performance. Check configuration tables at [JUnitPerf](https://github.com/noconnor/JUnitPerf).
 ```sh
 mvn -Pperformance integration-test
 ```
