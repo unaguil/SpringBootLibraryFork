@@ -45,7 +45,7 @@ class UserServiceTest {
         User user = new User("john", "pass", "John Doe", "john@email.org");
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
-        Optional<User> foundUser = userService.getUserById(1L);
+        Optional<User> foundUser = userService.getUserById(100L);
 
         assertTrue(foundUser.isPresent());
         assertEquals("John Doe", foundUser.get().getFullName());
