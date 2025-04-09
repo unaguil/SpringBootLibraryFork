@@ -89,7 +89,23 @@ If you want to also see the performance tests reports you also need to run the f
 mvn -Pperformance integration-test
 ```
 
-Then, open `target/site/index.html`, and the JaCoCo report should be available.
+Then, open `target/site/index.html`, and the performance report should be available.
+
+## Profiling with VisualVM
+
+In order to allow VisualVM to connect to the application, *sprin-boot-maven-plugin* needs to be configured with the following parameters:
+```xml
+   <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <configuration>
+         <!-- Required to allow VisualVM profiler connection -->
+         <jvmArguments>-Xverify:none</jvmArguments>
+      </configuration>
+   </plugin>
+```
+
+Then run the application as usual with the *mvn spring-boot:run* command and open VisualVM. You should see your application listed in the *Local* tab and be able to connect to it starting, for example, a CPU profiling session inside the 'Profiler' tab.
 
 ## Launching the app with Docker
 You may launch the app in one single command.

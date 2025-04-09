@@ -116,6 +116,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- Required to allow VisualVM profiler connection -->
+					<jvmArguments>-Xverify:none</jvmArguments>
+				</configuration>
 			</plugin>
 
 			<!-- JaCoCo for test coverage -->
@@ -271,7 +275,8 @@
 						</configuration>
 					</plugin>
 					<!-- Copy the report into the site directory
-					Use the maven-resources-plugin or maven-antrun-plugin to copy your generated report (perf-report.html) 
+					Use the maven-resources-plugin or maven-antrun-plugin to copy your generated report
+					(perf-report.html) 
 					from target/reports to the site output directory before site generation. -->
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
@@ -351,7 +356,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>3.5.2</version> 
+				<version>3.5.2</version>
 				<reportSets>
 					<reportSet>
 						<reports>
