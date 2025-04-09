@@ -1,3 +1,4 @@
+![example workflow](https://github.com/unaguil/SpringBootLibraryFork/actions/workflows/maven.yml/badge.svg)
 # Library Borrowing System
 
 ## Purpose
