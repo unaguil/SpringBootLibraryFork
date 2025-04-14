@@ -7,6 +7,9 @@ on:
   schedule:
     - cron: '0 18-23/2 * * *'  # 20:00–01:00 CET
     - cron: '0 0-6/2 * * *'    # 02:00–08:00 CET
+  # POST https://api.github.com/repos/dipina/SpringBootLibrary/actions/workflows/maven-site-integration.yml/dispatches  
+  workflow_dispatch:
+    
 
 jobs:
   build-and-test:
