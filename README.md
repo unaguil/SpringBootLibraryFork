@@ -107,6 +107,95 @@ In order to allow VisualVM to connect to the application, *sprin-boot-maven-plug
 
 Then run the application as usual with the *mvn spring-boot:run* command and open VisualVM. You should see your application listed in the *Local* tab and be able to connect to it starting, for example, a CPU profiling session inside the 'Profiler' tab.
 
+## Configuring CI/CD with
+## Configuring CI/CD with GitHub Actions
+GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. You can create workflows that build and test every pull request to your repository, or deploy merged pull requests to production.
+
+GitHub Actions goes beyond just DevOps and lets you run workflows when other events happen in your repository. For example, you can run a workflow to automatically add the appropriate labels whenever someone creates a new issue in your repository.
+
+GitHub provides Linux, Windows, and macOS virtual machines to run your workflows, or you can host your own self-hosted runners in your own data center or cloud infrastructure.
+
+The steps to follow to define a GitHub actions workflow for your project are:
+1. In your repository on GitHub, create a workflow file called `maven-site-integration.yml` in the `.github/workflows` directory.
+2. Copy the following YAML contents into the `maven-site-integration.yml` file:
+
+```yml
+name: Maven Site & Integration Tests
+
+on:
+  push:
+    branches:
+      - '**'
+  schedule:
+    - cron: '0 18-23/2 * * *'  # 20:00–01:00 CET
+    - cron: '0 0-6/2 * * *'    # 02:00–08:00 CET
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: libraryapidb
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Wait for MySQL to be ready
+        run: |
+          echo "Waiting for MySQL..."
+          until mysqladmin ping -h 127.0.0.1 -uroot -proot --silent; do
+            sleep 2
+          done
+
+      - name: Run DB initialization script
+        run: |
+          echo "Running DB setup..."
+          mysql -h 127.0.0.1 -uroot -proot < src/main/resources/dbsetup.sql
+
+      - name: Run Integration Tests
+        run: mvn -Pintegration integration-test
+
+      - name: Generate Maven Site
+        run: mvn site
+```
+3. Click **Commit changes**.
+4. In the "Propose changes" dialog, select either the option to commit to the default branch or the option to create a new branch and start a pull request. Then click **Commit changes** or **Propose changes**.
+
+Committing the workflow file to a branch in your repository triggers the push event and runs your workflow.
+
+To view the execution and results of your GitHub action's workflow go to **Actions** top menu of your repository.
+
+For more information about GitHub actions visit:
+- [Overview of GitHub actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
+- [Quickstart for GitHub actions](https://docs.github.com/en/actions/writing-workflows/quickstart)
+
+
 ## Launching the app with Docker
 You may launch the app in one single command.
 
