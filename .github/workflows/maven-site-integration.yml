@@ -61,3 +61,20 @@ jobs:
 
       - name: Generate Maven Site
         run: mvn site
+      
+        - name: Copy site output to docs/site folder
+        run: |
+          mkdir -p docs
+          rm -rf docs/site
+          mkdir -p docs/site
+          cp -r target/site/* docs/site/
+
+      - name: Commit and push docs
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add docs
+          git commit -m "Update Maven site [CI skip]" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
