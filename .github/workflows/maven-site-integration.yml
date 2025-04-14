@@ -62,7 +62,7 @@ jobs:
       - name: Generate Maven Site
         run: mvn site
       
-        - name: Copy site output to docs/site folder
+      - name: Copy site output to docs/site folder
         run: |
           mkdir -p docs
           rm -rf docs/site
