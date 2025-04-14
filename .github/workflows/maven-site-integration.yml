@@ -62,6 +62,9 @@ jobs:
       - name: Run Integration Tests
         run: mvn -Pintegration integration-test
 
+      - name: Run Performance Tests
+        run: mvn -Pperformance integration-test
+
       - name: Generate Maven Site
         run: mvn site
       

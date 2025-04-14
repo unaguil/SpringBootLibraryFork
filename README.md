@@ -190,6 +190,8 @@ Committing the workflow file to a branch in your repository triggers the push ev
 
 To view the execution and results of your GitHub action's workflow go to **Actions** top menu of your repository.
 
+Notice that sometimes you need to change access rights of jobs by visiting Settings --> Actions --> General --> Workflow permissions. For this example, it is necessary to set up "read and write permissions".
+
 For more information about GitHub actions visit:
 - [Overview of GitHub actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
 - [Quickstart for GitHub actions](https://docs.github.com/en/actions/writing-workflows/quickstart)
