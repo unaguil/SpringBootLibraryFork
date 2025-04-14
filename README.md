@@ -192,6 +192,25 @@ To view the execution and results of your GitHub action's workflow go to **Actio
 
 Notice that sometimes you need to change access rights of jobs by visiting Settings --> Actions --> General --> Workflow permissions. For this example, it is necessary to set up "read and write permissions".
 
+You may launch a GitHub action through an HTTP POST with the following command (for this example):
+```bash
+curl -X POST https://api.github.com/repos/dipina/SpringBootLibrary/actions/workflows/maven-site-integration.yml/dispatches \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer YOUR_PAT_HERE" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  -d '{"ref":"main"}'
+
+```
+
+Notice that to generate your our Personal Access Token you need to do the following:
+1. Go to GitHub's token creation page: [https://github.com/settings/tokens/new](https://github.com/settings/tokens/new)
+2. Fill in the form: "Trigger workflows via API", choose what suits you — 30 days, 90 days, or No expiration (only for trusted use) and select as scope `workflow` (for dispatching GitHub Actions workflows)
+3. Click "Generate token"
+4. Test it with an API call as the above
+5. Use GitHub Actions Secrets: go to your repo → Settings → Secrets → Actions → New repository secret
+   - Name: PAT_TOKEN
+   - Value: paste your PAT
+   
 For more information about GitHub actions visit:
 - [Overview of GitHub actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
 - [Quickstart for GitHub actions](https://docs.github.com/en/actions/writing-workflows/quickstart)
