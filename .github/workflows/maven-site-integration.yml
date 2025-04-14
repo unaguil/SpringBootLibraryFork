@@ -1,4 +1,4 @@
-name: Maven Site & Integration Tests
+name: Maven Site &n Peformance & Integration Tests
 
 on:
   push:
