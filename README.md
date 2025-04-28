@@ -215,6 +215,21 @@ For more information about GitHub actions visit:
 - [Overview of GitHub actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions)
 - [Quickstart for GitHub actions](https://docs.github.com/en/actions/writing-workflows/quickstart)
 
+## Generating Documentation with Doxygen and moving all documentation into docs folder
+To generate doxygen reports: `mvn doxygen:report` or `mvn site`
+
+If you want to generate all documentation and move it into `docs` folder of your project, do the following:
+1. Run the unit tests and converage tests: `mvn test jacoco:report`
+2. Run the performance tests: `mvn -Pperformance integration-test`
+3. Ensure that the performance reports are also moved into the `target\site\reports` folder: `mvn -Pperformance resources:copy-resources@copy-perf-report`
+4. Move all contents into `docs` folder: `mvn post-site`
+
+Notice that the `docs` is not moved into the repository in GitHub, since this folder is included in `.gitignore` file
+
+Please also notice that some classes have been documented extensively, according to Doxygen documentation style. Check the following classes:
+- `BorrowingController.java`
+- `BookService.java`
+- `Borrowing.java`
 
 ## Launching the app with Docker
 You may launch the app in one single command.
