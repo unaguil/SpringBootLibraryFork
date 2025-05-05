@@ -60,7 +60,9 @@ jobs:
           mysql -h 127.0.0.1 -uroot -proot < src/main/resources/dbsetup.sql
 
       - name: Run Integration Tests
-        run: mvn -Pintegration integration-test
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -Pintegration integration-test org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=unaguil_SpringBootLibraryFork
 
       - name: Run Performance Tests
         run: mvn -Pperformance integration-test
